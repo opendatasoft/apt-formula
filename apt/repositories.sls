@@ -53,7 +53,7 @@
 {% endif %}
 
 {%- set r_url = args.url or default_url %}
-{%- set r_distro = args.distro or 'stable' %}
+{%- set r_distro = grains.get('oscodename') if args.get('distro_from_oscodename', False) else args.get('distro','stable') %}
 {%- set r_comps = args.comps|default(['main'])|join(' ') %}
 {%- set r_keyserver = args.keyserver if args.keyserver is defined else apt_map.default_keyserver %}
 
